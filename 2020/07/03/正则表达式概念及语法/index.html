@@ -224,7 +224,7 @@
 <p>使用re库的compile方法编译,将一个字符串变成一个特征，而这个特征可以表达一组字符串：<br>p=re.compile(regex)  </p>
 <p>可以表达：<br>‘PN’<br>‘PYN’<br>‘PYTN’<br>‘PYTHN’<br>‘PYTHON’  </p>
 </blockquote>
-<h2 id="二、正则表达式语法（由字符和操作符构成）"><a href="#二、正则表达式语法（由字符和操作符构成）" class="headerlink" title="二、正则表达式语法（由字符和操作符构成）"></a>二、正则表达式语法（由字符和操作符构成）</h2><h3 id="（一）正则表达式的常用操作符："><a href="#（一）正则表达式的常用操作符：" class="headerlink" title="（一）正则表达式的常用操作符："></a>（一）正则表达式的常用操作符：</h3><p><img src="https://img-blog.csdn.net/20170323202311025" srcset="/img/loading.gif" alt="正则表达式的常用操作符1"><br><img src="https://img-blog.csdn.net/20170323204916037" srcset="/img/loading.gif" alt="正则表达式的常用操作符2"></p>
+<h2 id="二、正则表达式语法（由字符和操作符构成）"><a href="#二、正则表达式语法（由字符和操作符构成）" class="headerlink" title="二、正则表达式语法（由字符和操作符构成）"></a>二、正则表达式语法（由字符和操作符构成）</h2><h3 id="（一）正则表达式的常用操作符："><a href="#（一）正则表达式的常用操作符：" class="headerlink" title="（一）正则表达式的常用操作符："></a>（一）正则表达式的常用操作符：</h3><p><img src="/2020/07/03/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AF%AD%E6%B3%95/20170323202311025.png" srcset="/img/loading.gif" alt="正则表达式的常用操作符1"><br><img src="/2020/07/03/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AF%AD%E6%B3%95/20170323204916037.png" srcset="/img/loading.gif" alt="正则表达式的常用操作符2"></p>
 <h4 id="1-正则表达式语法常规实例："><a href="#1-正则表达式语法常规实例：" class="headerlink" title="1.正则表达式语法常规实例："></a>1.正则表达式语法常规实例：</h4><pre><code class="hljs python">P(Y|YT|YTH|YTHO)?N    "PN","PYN","PYTN","PYTHN","PYTHON"
 PYTHON+               <span class="hljs-string">"PYTHON"</span>,<span class="hljs-string">"PYTHONN"</span>,<span class="hljs-string">"PYTHONNN..."</span>
 PY[TH]ON              <span class="hljs-string">"PYTON"</span>,<span class="hljs-string">"PYHON"</span>
