@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Frank Yeats">
+  <meta name="keywords" content="">
+  <title>Requests库的7个方法 - Yeats’s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>烨辞的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-07-03 19:59">
+      July 3, 2020 pm
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      26
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="Requests库7个主要方法解析"><a href="#Requests库7个主要方法解析" class="headerlink" title="Requests库7个主要方法解析"></a>Requests库7个主要方法解析</h1><h2 id="一、request方法："><a href="#一、request方法：" class="headerlink" title="一、request方法："></a>一、request方法：</h2><p><strong>格式：</strong><br><code>request.request(method,url,**kwargs)</code></p>
+<blockquote>
+<p>r = requests.request(method=’GET’, url=url, *<em>kwargs)<br>r = requests.get(url, *</em>kwargs)<br>PS：上面的方法和下面的方法达到的效果是一样的，就是做了一层封装，把比较常用的方法都抽出来,  </p>
+</blockquote>
+<ul>
+<li><code>method</code>:请求方式，对应HTTP协议请求方法get/put/post/head（获取资源概要）等7种请求方法，例如：request.request(‘GET’,url,**kwargs) ，（Requests库的方法为小写，而HTTP协议请求方法为大写）</li>
+<li><code>url</code>：拟获取页面的URL链接</li>
+<li><code>**kwargs</code>：控制访问参数，共13个:<ul>
+<li><code>params</code>:字典或字节序列(字符串)，作为参数增加至URL中(搭配get)</li>
+<li><code>data</code>:字典(被放进form)或字节序列(字符串)（被放进data）或文件对象，作为Request的内容text（搭配put）</li>
+<li><code>json</code>:JSON格式的数据，作为Request的内容text（json格式，其实就是字符串）（搭配post）</li>
+<li><code>headers</code>:字典，HTTP定制头部，隐藏爬虫信息，模拟浏览器的头部信息（搭配post）</li>
+<li><code>cookies</code>:字典或CookieJar,Request中的cookie（搭配post）</li>
+<li><code>auth</code>: 元祖，支持HTTP认证功能(搭配get)</li>
+<li><code>files</code>: 字典类型，传输文件（搭配post）</li>
+<li><code>timeout</code>: 设定超时时间，秒为单位(搭配get)</li>
+<li><code>proxies</code>: 字典类型，设定访问代理服务器，可以增加登录认证,proxies即代理人(搭配get)</li>
+<li><code>allow_redirects</code>: True/False,默认为True,重定向开关(搭配get)</li>
+<li><code>stream</code>: True/False，默认为True,获取内容立即下载开关(搭配get)</li>
+<li><code>verity</code>: True/False默认Ture,认证ssl证书开关(搭配get)</li>
+<li><code>cert</code>: 本地ssl证书路径(搭配get)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="（一）e-g-params介绍：字典或字节序列，作为参数增加到url中"><a href="#（一）e-g-params介绍：字典或字节序列，作为参数增加到url中" class="headerlink" title="（一）e.g.:params介绍：字典或字节序列，作为参数增加到url中"></a>（一）e.g.:<code>params</code>介绍：字典或字节序列，作为参数增加到url中</h3><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests
+
+
+kv=&#123;<span class="hljs-string">'key1'</span>:<span class="hljs-string">'value1'</span>,<span class="hljs-string">'key2'</span>:<span class="hljs-string">'value2'</span>&#125;
+
+r=requests.request(<span class="hljs-string">'GET'</span>,<span class="hljs-string">'http://python123.io/ws'</span>,params=kv)   
+print(r.url)
+
+
+<span class="hljs-comment"># Output:</span>
+https://python123.io/ws?key1=value1&amp;key2=value2</code></pre>
+
+
+
+
+
+<hr>
+<h3 id="（二）e-g-date介绍：字典，字节序列或文件对象-作为Request的内容"><a href="#（二）e-g-date介绍：字典，字节序列或文件对象-作为Request的内容" class="headerlink" title="（二）e.g.:date介绍：字典，字节序列或文件对象,作为Request的内容"></a>（二）e.g.:<code>date</code>介绍：字典，字节序列或文件对象,作为Request的内容</h3><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests
+
+kv=&#123;<span class="hljs-string">'key1'</span>:<span class="hljs-string">'value1'</span>,<span class="hljs-string">'key2'</span>:<span class="hljs-string">'value2'</span>&#125;
+
+r=requests.request(<span class="hljs-string">'PUT'</span>,<span class="hljs-string">'http://httpbin.org/put'</span>,data=kv)   
+print(r.status_code)
+print(r.text)
+
+
+<span class="hljs-comment"># Output:</span>
+<span class="hljs-number">200</span>
+&#123;
+  <span class="hljs-string">"args"</span>: &#123;&#125;,
+  <span class="hljs-string">"data"</span>: <span class="hljs-string">""</span>,
+  <span class="hljs-string">"files"</span>: &#123;&#125;,
+  <span class="hljs-string">"form"</span>: &#123;
+    <span class="hljs-string">"key1"</span>: <span class="hljs-string">"value1"</span>,
+    <span class="hljs-string">"key2"</span>: <span class="hljs-string">"value2"</span>
+  &#125;,
+  <span class="hljs-string">"headers"</span>: &#123;
+    <span class="hljs-string">"Accept"</span>: <span class="hljs-string">"*/*"</span>,
+    <span class="hljs-string">"Accept-Encoding"</span>: <span class="hljs-string">"gzip, deflate"</span>,
+    <span class="hljs-string">"Content-Length"</span>: <span class="hljs-string">"23"</span>,
+    <span class="hljs-string">"Content-Type"</span>: <span class="hljs-string">"application/x-www-form-urlencoded"</span>,
+    <span class="hljs-string">"Host"</span>: <span class="hljs-string">"httpbin.org"</span>,
+    <span class="hljs-string">"User-Agent"</span>: <span class="hljs-string">"python-requests/2.22.0"</span>,
+    <span class="hljs-string">"X-Amzn-Trace-Id"</span>: <span class="hljs-string">"Root=1-5e4a8581-cb3c8890bd750450bacc8820"</span>
+  &#125;,
+  <span class="hljs-string">"json"</span>: null,
+  <span class="hljs-string">"origin"</span>: <span class="hljs-string">"218.72.109.87"</span>,
+  <span class="hljs-string">"url"</span>: <span class="hljs-string">"http://httpbin.org/put"</span>
+
+&#125;</code></pre>
+
+
+
+
+
+<hr>
+<h3 id="（三）e-g-json介绍：JSON格式的数据，作为Request的内容"><a href="#（三）e-g-json介绍：JSON格式的数据，作为Request的内容" class="headerlink" title="（三）e.g.:json介绍：JSON格式的数据，作为Request的内容"></a>（三）e.g.:<code>json</code>介绍：JSON格式的数据，作为Request的内容</h3><pre><code class="hljs python">In [<span class="hljs-number">48</span>]: kv = &#123;<span class="hljs-string">'name'</span>: <span class="hljs-string">'youdi'</span>, <span class="hljs-string">'role'</span>: <span class="hljs-string">'king'</span>, <span class="hljs-string">'rank'</span>: <span class="hljs-string">'the one'</span>&#125;
+
+In [<span class="hljs-number">49</span>]: url = <span class="hljs-string">'http://httpbin.org/post'</span>
+
+In [<span class="hljs-number">50</span>]: r = requests.request(method=<span class="hljs-string">'POST'</span>, url=url, json=kv)
+
+In [<span class="hljs-number">51</span>]: print(r.text)
+&#123;
+  <span class="hljs-string">"args"</span>: &#123;&#125;, 
+  <span class="hljs-string">"data"</span>: <span class="hljs-string">"&#123;\"role\": \"king\", \"rank\": \"the one\", \"name\": \"youdi\"&#125;"</span>,  <span class="hljs-comment">#json格式，其实就是字符串</span>
+  <span class="hljs-string">"files"</span>: &#123;&#125;, 
+  <span class="hljs-string">"form"</span>: &#123;&#125;, 
+  <span class="hljs-string">"headers"</span>: &#123;
+    <span class="hljs-string">"Accept"</span>: <span class="hljs-string">"*/*"</span>, 
+    <span class="hljs-string">"Accept-Encoding"</span>: <span class="hljs-string">"gzip, deflate"</span>, 
+    <span class="hljs-string">"Connection"</span>: <span class="hljs-string">"close"</span>, 
+    <span class="hljs-string">"Content-Length"</span>: <span class="hljs-string">"52"</span>, 
+    <span class="hljs-string">"Content-Type"</span>: <span class="hljs-string">"application/json"</span>, 
+    <span class="hljs-string">"Host"</span>: <span class="hljs-string">"httpbin.org"</span>, 
+    <span class="hljs-string">"User-Agent"</span>: <span class="hljs-string">"python-requests/2.13.0"</span>
+  &#125;, 
+  <span class="hljs-string">"json"</span>: &#123;
+    <span class="hljs-string">"name"</span>: <span class="hljs-string">"youdi"</span>, 
+    <span class="hljs-string">"rank"</span>: <span class="hljs-string">"the one"</span>, 
+    <span class="hljs-string">"role"</span>: <span class="hljs-string">"king"</span>
+  &#125;, 
+  <span class="hljs-string">"origin"</span>: <span class="hljs-string">"183.60.175.16"</span>, 
+  <span class="hljs-string">"url"</span>: <span class="hljs-string">"http://httpbin.org/post"</span>
+&#125;</code></pre>
+
+
+
+<hr>
+<h3 id="（四）e-g-headers介绍-字典-HTTP定制头部信息，隐藏爬虫信息，模拟浏览器的头部信息"><a href="#（四）e-g-headers介绍-字典-HTTP定制头部信息，隐藏爬虫信息，模拟浏览器的头部信息" class="headerlink" title="（四）e.g.:headers介绍:字典, HTTP定制头部信息，隐藏爬虫信息，模拟浏览器的头部信息"></a>（四）e.g.:<code>headers</code>介绍:字典, HTTP定制头部信息，隐藏爬虫信息，模拟浏览器的头部信息</h3><pre><code class="hljs python">In [<span class="hljs-number">58</span>]: url = <span class="hljs-string">'http://httpbin.org/post'</span>
+
+In [<span class="hljs-number">59</span>]: r = requests.request(<span class="hljs-string">'POST'</span>, url)
+
+<span class="hljs-comment"># 头部信息</span>
+In [<span class="hljs-number">69</span>]: r.request.headers   <span class="hljs-comment"># r包含request请求。r.request.headers是请求头(request headers)，而r.headers是响应头(response headers)</span>
+<span class="hljs-comment"># 观察User-Agent</span>
+Out[<span class="hljs-number">69</span>]: &#123;<span class="hljs-string">'Accept'</span>: <span class="hljs-string">'*/*'</span>, <span class="hljs-string">'User-Agent'</span>: <span class="hljs-string">'python-requests/2.13.0'</span>, <span class="hljs-string">'Connection'</span>: <span class="hljs-string">'keep-alive'</span>, <span class="hljs-string">'Accept-Encoding'</span>: <span class="hljs-string">'gzip, deflate'</span>, <span class="hljs-string">'Content-Length'</span>: <span class="hljs-string">'0'</span>&#125;
+
+-------------------------------------------------------------------------------------------------
+<span class="hljs-comment">#加入headers后</span>
+In [<span class="hljs-number">62</span>]: headers = &#123; <span class="hljs-comment"># 浏览器代理</span>
+    ...:      <span class="hljs-string">"User-Agent"</span>: <span class="hljs-string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Ch</span>
+<span class="hljs-string">    ...: rome/57.0.2987.133 Safari/537.36"</span>
+    ...: &#125;
+In [<span class="hljs-number">63</span>]: r = requests.request(<span class="hljs-string">'POST'</span>, url, headers=headers)
+
+In [<span class="hljs-number">71</span>]: r.request.headers       <span class="hljs-comment"># 查看请求头</span>
+Out[<span class="hljs-number">71</span>]: &#123;<span class="hljs-string">'Accept'</span>: <span class="hljs-string">'*/*'</span>, <span class="hljs-string">'User-Agent'</span>: <span class="hljs-string">'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'</span>, <span class="hljs-string">'Connection'</span>: <span class="hljs-string">'keep-alive'</span>, <span class="hljs-string">'Accept-Encoding'</span>: <span class="hljs-string">'gzip, deflate'</span>, <span class="hljs-string">'Content-Length'</span>: <span class="hljs-string">'0'</span>&#125;</code></pre>
+
+
+
+
+
+<hr>
+<h3 id="（五）e-g-cookie介绍：字典或CooKiJar-Request中的cookie"><a href="#（五）e-g-cookie介绍：字典或CooKiJar-Request中的cookie" class="headerlink" title="（五）e.g.:cookie介绍：字典或CooKiJar, Request中的cookie"></a>（五）e.g.:<code>cookie</code>介绍：字典或CooKiJar, Request中的cookie</h3><pre><code class="hljs python"><span class="hljs-comment">#先获取百度的cookie，当我们使用电脑进行浏览网页的时候，服务器就会生成一个证书，并且返回给我们的电脑（响应），这个证书就是cookie，一般情况下，cookie是服务器写入客户端的文件，我们也可以叫浏览器缓存。用户在下次访问的时候，就会把本地的cookie文件加上url一起发送给服务器，服务器以此来判断用户的状态。</span>
+In [<span class="hljs-number">74</span>]: r = requests.request(<span class="hljs-string">'GET'</span>, <span class="hljs-string">'https://www.baidu.com'</span>)
+
+In [<span class="hljs-number">75</span>]: r
+Out[<span class="hljs-number">75</span>]: &lt;Response [<span class="hljs-number">200</span>]&gt;
+<span class="hljs-comment"># 保存在变量中</span>
+In [<span class="hljs-number">76</span>]: cookie = r.cookies       <span class="hljs-comment"># 将r的cookies属性存储在变量cookie里</span>
+
+<span class="hljs-comment"># cookie类型           </span>
+In [<span class="hljs-number">86</span>]: type(cookie)
+Out[<span class="hljs-number">86</span>]: requests.cookies.RequestsCookieJar
+
+
+In [<span class="hljs-number">77</span>]: r_baidu = requests.request(<span class="hljs-string">'POST'</span>, <span class="hljs-string">'https://www.baidu.com/s?ie=utf-8&amp;f=8&amp;rsv_bp=0&amp;rsv_idx=1&amp;tn=baidu&amp;wd=old&amp;rsv_pq=981edbe6000308e9&amp;rsv_t=76c1VG%2B1PcKzCGSEjcf3W2zDn5ZcBnhR1TAe%2FcJ32OW62aKsa5DWo7YYsms&amp;rqlang=cn&amp;rsv_enter=1&amp;rsv_sug3=2'</span>, cookie=cookie)
+<span class="hljs-comment"># https://www.baidu.com/s?ie=utf-8&amp;f=8&amp;rsv_bp=0&amp;rsv_idx=1&amp;tn=baidu&amp;wd=test&amp;rsv_pq=981edbe6000308e9&amp;rsv_t=76c1VG%2B1PcKzCGSEjcf3W2zDn5ZcBnhR1TAe%2FcJ32OW62aKsa5DWo7YYsms&amp;rqlang=cn&amp;rsv_enter=1&amp;rsv_sug3=2 中 wd修改关键词w为old 就是提交给百度进行搜索old的内容</span></code></pre>
+
+
+
+<hr>
+<h3 id="（六）e-g-auth介绍：元祖，支持HTTP认证功能"><a href="#（六）e-g-auth介绍：元祖，支持HTTP认证功能" class="headerlink" title="（六）e.g.:auth介绍：元祖，支持HTTP认证功能"></a>（六）e.g.:<code>auth</code>介绍：元祖，支持HTTP认证功能</h3><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests
+<span class="hljs-comment"># 最简单的http验证</span>
+<span class="hljs-keyword">from</span> requests.auth <span class="hljs-keyword">import</span> HTTPBasicAuth
+
+r = requests.get(<span class="hljs-string">'http://httpbin.org/auth'</span>, auth=HTTPBasicAuth(<span class="hljs-string">'user'</span>, <span class="hljs-string">'user'</span>))
+<span class="hljs-comment"># r = requests.get('http://httpbin.org/auth', auth=('user', 'user'))</span>
+print(r.status_code)</code></pre>
+
+<hr>
+<h3 id="（七）e-g-files介绍：字典类型，传输文件"><a href="#（七）e-g-files介绍：字典类型，传输文件" class="headerlink" title="（七）e.g.:files介绍：字典类型，传输文件"></a>（七）e.g.:<code>files</code>介绍：字典类型，传输文件</h3><pre><code class="hljs python">fs = &#123;file: open(<span class="hljs-string">'data.xls'</span>, <span class="hljs-string">'rb'</span>)&#125;        <span class="hljs-comment"># .xls是一个特有的二进制格式，'rb'为为读取二进制文件</span>
+<span class="hljs-comment"># 使用files参数就可以了</span>
+r = requests.request(<span class="hljs-string">'POST'</span>,<span class="hljs-string">'http://httpbin.org/post'</span>,files=fs)       <span class="hljs-comment"># files=字典</span></code></pre>
+
+<hr>
+<h3 id="（八）e-g-timeout介绍：设定超时时间，秒为单位"><a href="#（八）e-g-timeout介绍：设定超时时间，秒为单位" class="headerlink" title="（八）e.g.:timeout介绍：设定超时时间，秒为单位"></a>（八）e.g.:<code>timeout</code>介绍：设定超时时间，秒为单位</h3><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests
+<span class="hljs-keyword">from</span> requests.exceptions <span class="hljs-keyword">import</span> ReadTimeout     <span class="hljs-comment"># 导入request.exceptions下的各种异常错误下的各种异常错误</span>
+
+<span class="hljs-keyword">try</span>:     <span class="hljs-comment"># 把请求放在try下</span>
+  <span class="hljs-comment"># 设置必须在500ms内收到响应，不然或抛出ReadTimeout异常</span>
+  response = requests.get(<span class="hljs-string">"http://httpbin.org/get"</span>, timeout=<span class="hljs-number">0.5</span>)
+           print(response.status_code)
+<span class="hljs-keyword">except</span> ReadTimeout:   <span class="hljs-comment"># 把可能发生的异常用except获取：s</span>
+  print(<span class="hljs-string">'Timeout'</span>)</code></pre>
+
+<hr>
+<h3 id="（九）e-g-proxies介绍：字典类型，设定访问代理服务器，可以增加登录认证"><a href="#（九）e-g-proxies介绍：字典类型，设定访问代理服务器，可以增加登录认证" class="headerlink" title="（九）e.g.:proxies介绍：字典类型，设定访问代理服务器，可以增加登录认证"></a>（九）e.g.:<code>proxies</code>介绍：字典类型，设定访问代理服务器，可以增加登录认证</h3><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests
+
+<span class="hljs-comment">#普通代理（可隐藏用户爬取网页的原ID地址信息）</span>
+proxies = &#123;
+   <span class="hljs-string">"http"</span>: <span class="hljs-string">"http://127.0.0.1:1080"</span>,
+   <span class="hljs-string">"https"</span>: <span class="hljs-string">"https://127.0.0.1:1080"</span>,
+&#125;
+<span class="hljs-comment"># 往请求中设置代理(proxies)</span>
+r = requests.get(<span class="hljs-string">"https://www.taobao.com"</span>, proxies=proxies)
+print(r.status_code)
+---------------------------------------------------------------
+<span class="hljs-comment"># 带有用户名和密码的代理</span>
+proxies = &#123;
+   <span class="hljs-string">"http"</span>: <span class="hljs-string">"http://user:password@127.0.0.1:9743/"</span>,
+&#125;
+r = requests.get(<span class="hljs-string">"https://www.taobao.com"</span>, proxies=proxies)
+print(r.status_code)
+---------------------------------------------------------------
+<span class="hljs-comment"># 设置socks代理,翻墙必备</span>
+proxies = &#123;
+   <span class="hljs-string">'http'</span>: <span class="hljs-string">'socks5://127.0.0.1:1080'</span>,
+   <span class="hljs-string">'https'</span>: <span class="hljs-string">'socks5://127.0.0.1:1080'</span>
+&#125;
+r = requests.get(<span class="hljs-string">"https://www.google.com"</span>, proxies=proxies)
+print(r.status_code)</code></pre>
+
+<hr>
+<h3 id="（十）e-g-allow-redirects介绍-True-False-默认为True-重定向开关"><a href="#（十）e-g-allow-redirects介绍-True-False-默认为True-重定向开关" class="headerlink" title="（十）e.g.:allow_redirects介绍:True/False,默认为True,重定向开关"></a>（十）e.g.:<code>allow_redirects</code>介绍:True/False,默认为True,重定向开关</h3><pre><code class="hljs python">r = requests.request(<span class="hljs-string">'GET'</span>,<span class="hljs-string">'http://httpbin.org/get'</span>,allow_redirects=<span class="hljs-literal">False</span>)</code></pre>
+
+<hr>
+<h3 id="（十一）e-g-stream介绍True-False，默认为True-获取内容立即下载开关"><a href="#（十一）e-g-stream介绍True-False，默认为True-获取内容立即下载开关" class="headerlink" title="（十一）e.g.:stream介绍True/False，默认为True,获取内容立即下载开关"></a>（十一）e.g.:<code>stream</code>介绍True/False，默认为True,获取内容立即下载开关</h3><pre><code class="hljs python">r = requests.request(<span class="hljs-string">'GET'</span>,<span class="hljs-string">'http://httpbin.org/get/**.txt'</span>,stream=<span class="hljs-literal">False</span>)</code></pre>
+
+<hr>
+<h3 id="（十二）e-g-verity介绍-True-False默认Ture-认证ssl证书开关"><a href="#（十二）e-g-verity介绍-True-False默认Ture-认证ssl证书开关" class="headerlink" title="（十二）e.g.:verity介绍:True/False默认Ture,认证ssl证书开关"></a>（十二）e.g.:<code>verity</code>介绍:True/False默认Ture,认证ssl证书开关</h3><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests
+<span class="hljs-comment"># 无证书访问</span>
+r = requests.get(<span class="hljs-string">'https://www.12306.cn'</span>)
+<span class="hljs-comment"># 在请求https时，request会进行证书的验证，如果验证失败则会抛出异常</span>
+print(r.status_code)
+---------------------------------------------------------------
+
+<span class="hljs-comment"># 关闭验证，但是仍然会报出证书警告(不安全的请求警告)</span>
+r = requests.get(<span class="hljs-string">'https://www.12306.cn'</span>,verify=<span class="hljs-literal">False</span>)
+print(r.status_code)
+----------------------------------------------------------------
+<span class="hljs-comment"># 消除关闭证书验证的警告</span>
+<span class="hljs-keyword">from</span> requests.packages <span class="hljs-keyword">import</span> urllib3
+
+<span class="hljs-comment"># 关闭警告</span>
+urllib3.disable_warnings()
+r = requests.get(<span class="hljs-string">'https://www.12306.cn'</span>,verify=<span class="hljs-literal">False</span>)
+print(r.status_code)</code></pre>
+
+
+
+<hr>
+<h3 id="（十三）e-g-cert介绍-本地ssl证书路径"><a href="#（十三）e-g-cert介绍-本地ssl证书路径" class="headerlink" title="（十三）e.g.:cert介绍:本地ssl证书路径"></a>（十三）e.g.:<code>cert</code>介绍:本地ssl证书路径</h3><pre><code class="hljs python"><span class="hljs-comment"># 设置本地证书</span>
+<span class="hljs-keyword">import</span> requests
+r = requests.get(<span class="hljs-string">'https://www.12306.cn'</span>, cert=(<span class="hljs-string">'/home/youdi/Download/**.crt'</span>, <span class="hljs-string">'/hone/youdi/.ssh/**.key'</span>))
+print(r.status_code)</code></pre>
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Web-Scraping-With-Python-Requests%E5%BA%93/">Web Scraping With Python,Requests库</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/07/03/Response%E5%BC%82%E5%B8%B8%E5%8F%8A%E7%88%AC%E5%8F%96%E7%BD%91%E9%A1%B5%E7%9A%84%E9%80%9A%E7%94%A8%E4%BB%A3%E7%A0%81%E6%A1%86%E6%9E%B6/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Response异常及爬取网页的通用代码框架</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/03/re%E5%BA%93/">
+                        <span class="hidden-mobile">RE库</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+    <!-- APlayer 音乐播放器 -->
+    <div id="aplayer"></div>
+    <script defer src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js" ></script>
+<link  rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css" />
+<script type="text/javascript">
+  var oldLoadAp = window.onload;
+  window.onload = function () {
+    oldLoadAp && oldLoadAp();
+
+    new APlayer({
+      container: document.getElementById('aplayer'),
+      fixed: true,
+      autoplay: 'false' === 'true',
+      loop: 'all',
+      order: 'random',
+      theme: '#b7daff',
+      preload: 'none',
+      audio: [{"name":"7!! - オレンジ","artist":"7!!","url":"/songs/7!! - オレンジ.flac","cover":"/img/avatar.png"},{"name":"CMJ - 告白之夜（纯音乐）（翻自 Ayasa绚沙）","artist":"CMJ","url":"/songs/CMJ - 告白之夜（纯音乐）（翻自 Ayasa绚沙）.flac","cover":"/img/avatar.png"},{"name":"Goose house - 光るなら","artist":"Goose house","url":"/songs/Goose house - 光るなら.flac","cover":"/img/avatar.png"},{"name":"古川恵実子,清水美恵 - 一人でも平気","artist":"古川恵実子; 清水美恵","url":"/songs/古川恵実子,清水美恵 - 一人でも平気.mp3","cover":"/img/avatar.png"}]
+    });
+  }
+</script>
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Requests库的7个方法&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
