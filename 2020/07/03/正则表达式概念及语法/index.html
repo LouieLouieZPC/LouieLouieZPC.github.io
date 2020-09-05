@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+  
+<head>
+  <meta name="baidu-site-verification" content="DHTKkuIrBK" />
+  <meta name="google-site-verification" content="Z0mWwvwaOJ_5Rydsj1aX4c5vT_2e2EWsLdVwwCLqixU" />
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Frank Yeats">
+  <meta name="keywords" content="">
+  <title>正则表达式概念及语法 - 烨辞的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+
+
+
+<body>
+  <!-- 天气浮窗 -->
+  <script type="text/javascript">
+  WIDGET = {FID: 'T2dO5OLaFO'}
+  </script>
+  <script type="text/javascript" src="https://apip.weatherdt.com/float/static/js/r.js?v=1111"></script>
+
+  <!--动态线条背景-->
+  <script type="text/javascript"
+  color="122 103 238" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+  </script>
+  
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>烨辞的博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-07-03 15:31">
+      July 3, 2020 pm
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      788 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      10
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><p><a href="https://blog.csdn.net/zhangzeyuaaa/article/details/50390333" target="_blank" rel="noopener">正则表达式的基本概念和语法</a><br><a href="https://www.runoob.com/python/python-reg-expressions.html" target="_blank" rel="noopener">菜鸟教程</a><br><a href="https://blog.csdn.net/JOJOY_tester/article/details/71156117" target="_blank" rel="noopener">正则表达式使用总结</a></p>
+<h2 id="一、正则表达式概念"><a href="#一、正则表达式概念" class="headerlink" title="一、正则表达式概念"></a>一、正则表达式概念</h2><p>正则表达式，又称正规表示法、常规表示法（英语：Regular Expression，在代码中常简写为regex、regexp或RE），计算机科学的一个概念。正则表达式使用单个字符串来描述、匹配一系列符合某个句法规则的字符串。<br>（一）是什么：  </p>
+<ul>
+<li>是一个通用的字符串表达框架</li>
+<li>是简洁表单表达一组字符串的表达式</li>
+<li>针对字符串表达“简洁”和“特征”思想工具</li>
+<li>判断某字符串的特征归属  </li>
+</ul>
+<p>（二）有什么用：</p>
+<ul>
+<li>表达文本类型的特征（病毒/入侵等）</li>
+<li>同时查找或替换一组字符串</li>
+<li>匹配字符串的全部或部分★  </li>
+</ul>
+<p>（三）怎么使用：<br><strong>编译：将符合正则表达式语法的字符串转换为正则表达式特征</strong>  </p>
+<blockquote>
+<p>将正则表达式字符串赋给regex：<br>regex=’P(Y|YT|YTH|YTHO|?N)’  </p>
+<p>使用re库的compile方法编译,将一个字符串变成一个特征，而这个特征可以表达一组字符串：<br>p=re.compile(regex)  </p>
+<p>可以表达：<br>‘PN’<br>‘PYN’<br>‘PYTN’<br>‘PYTHN’<br>‘PYTHON’  </p>
+</blockquote>
+<h2 id="二、正则表达式语法（由字符和操作符构成）"><a href="#二、正则表达式语法（由字符和操作符构成）" class="headerlink" title="二、正则表达式语法（由字符和操作符构成）"></a>二、正则表达式语法（由字符和操作符构成）</h2><h3 id="（一）正则表达式的常用操作符："><a href="#（一）正则表达式的常用操作符：" class="headerlink" title="（一）正则表达式的常用操作符："></a>（一）正则表达式的常用操作符：</h3><p><img src="/2020/07/03/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AF%AD%E6%B3%95/20170323202311025.png" srcset="/img/loading.gif" alt="正则表达式的常用操作符1"><br><img src="/2020/07/03/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AF%AD%E6%B3%95/20170323204916037.png" srcset="/img/loading.gif" alt="正则表达式的常用操作符2"></p>
+<h4 id="1-正则表达式语法常规实例："><a href="#1-正则表达式语法常规实例：" class="headerlink" title="1.正则表达式语法常规实例："></a>1.正则表达式语法常规实例：</h4><pre><code class="hljs python">P(Y|YT|YTH|YTHO)?N    "PN","PYN","PYTN","PYTHN","PYTHON"
+PYTHON+               <span class="hljs-string">"PYTHON"</span>,<span class="hljs-string">"PYTHONN"</span>,<span class="hljs-string">"PYTHONNN..."</span>
+PY[TH]ON              <span class="hljs-string">"PYTON"</span>,<span class="hljs-string">"PYHON"</span>
+PY[^TH]?ON            "PYON","PYAON","PYXON"
+PY&#123;:<span class="hljs-number">3</span>&#125;N               <span class="hljs-string">"PN"</span>,<span class="hljs-string">"PYN"</span>,<span class="hljs-string">"PYYN"</span>,<span class="hljs-string">"PYYYN"</span>   <span class="hljs-comment"># 表示扩展前一个字符0到3次，含3次</span></code></pre>
+
+<h4 id="2-正则表达式语法经典实例："><a href="#2-正则表达式语法经典实例：" class="headerlink" title="2.正则表达式语法经典实例："></a>2.正则表达式语法经典实例：</h4><pre><code class="hljs python">(cc)*                重复任意偶次数的c
+^[A-Za-z]+$          由<span class="hljs-number">26</span>个字母组成的字符串
+^[A-Za-z0<span class="hljs-number">-9</span>]+$       由<span class="hljs-number">26</span>个字母和数字组成的字符串
+^-?\d+$              整数形式的字符串
+^[<span class="hljs-number">0</span><span class="hljs-number">-9</span>]*[<span class="hljs-number">1</span><span class="hljs-number">-9</span>][<span class="hljs-number">0</span><span class="hljs-number">-9</span>]*$  正整数形式的字符串
+[<span class="hljs-number">1</span><span class="hljs-number">-9</span>]\d&#123;<span class="hljs-number">5</span>&#125;           中国境内邮政编码，<span class="hljs-number">6</span>位
+[\u4e00-\u9fa5]      匹配中文字符  <span class="hljs-comment">#采用utf8编码约定中文字符取值范围</span>
+\d&#123;<span class="hljs-number">3</span>&#125;-\d&#123;<span class="hljs-number">8</span>&#125;|\d&#123;<span class="hljs-number">4</span>&#125;-\d&#123;<span class="hljs-number">7</span>&#125;  国内电话号码，<span class="hljs-number">010</span><span class="hljs-number">-68913536</span>  <span class="hljs-number">11</span>位啊</code></pre>
+
+<h4 id="3-匹配IP地址的正则表达式："><a href="#3-匹配IP地址的正则表达式：" class="headerlink" title="3.匹配IP地址的正则表达式："></a>3.匹配IP地址的正则表达式：</h4><p>（IP地址分4段，每段是0-255）<br>0~255的范围由四段构成：分别为：<br><code>0-99：        [1-9]?\d</code><br><code>100-199：     1\d{2}</code><br><code>200-249：     2[0-4]\d</code><br><code>250-255：     25[0-5]</code></p>
+<p>则ip地址为：<br><code>(([1-9]?\d|1\d{2}|2[0-4]\d|25[0-5]).){3}([1-9]?\d|1\d{2}|2[0-4]\d|25[0-5])</code></p>
+<h2 id="三、正则表达式和bs4结合实操："><a href="#三、正则表达式和bs4结合实操：" class="headerlink" title="三、正则表达式和bs4结合实操："></a>三、正则表达式和bs4结合实操：</h2><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python3</span>
+<span class="hljs-comment">#-*-coding:utf-8-*-</span>
+
+<span class="hljs-keyword">import</span> re
+<span class="hljs-keyword">from</span> fake_useragent <span class="hljs-keyword">import</span> UserAgent
+<span class="hljs-keyword">import</span> requests
+<span class="hljs-keyword">from</span> bs4 <span class="hljs-keyword">import</span> BeautifulSoup
+url=<span class="hljs-string">'http://www.pythonscraping.com/pages/page3.html'</span>
+
+ua=UserAgent()
+kv=&#123;<span class="hljs-string">'user-agent'</span>:ua.random&#125;
+
+
+<span class="hljs-keyword">try</span>:
+    r=requests.get(url,timeout=<span class="hljs-number">30</span>,headers=kv)
+    print(r.status_code)
+    r.raise_for_status()
+    r.encoding=r.apparent_encoding
+    demo=r.text
+<span class="hljs-keyword">except</span>:
+    print(<span class="hljs-string">'something is error!!!😱'</span>)
+<span class="hljs-keyword">else</span>:
+    soup=BeautifulSoup(demo,<span class="hljs-string">'html.parser'</span>)
+    print(<span class="hljs-string">'----------------------------------------------------------------'</span>)
+    images=soup.find_all(<span class="hljs-string">'img'</span>,&#123;<span class="hljs-string">'src'</span>:re.compile(<span class="hljs-string">r'\.\./img/gifts/img.\.jpg'</span>)&#125;)   <span class="hljs-comment">#这里将正则表达式和find_all()函数配合使用</span>
+    <span class="hljs-keyword">for</span> image <span class="hljs-keyword">in</span> images:
+        print(image[<span class="hljs-string">'src'</span>])   <span class="hljs-comment"># 迭代打印image标签中的src属性的内容</span>
+
+<span class="hljs-string">'''</span>
+<span class="hljs-string"># Output:</span>
+<span class="hljs-string">200</span>
+<span class="hljs-string">----------------------------------------------------------------</span>
+<span class="hljs-string">../img/gifts/img1.jpg</span>
+<span class="hljs-string">../img/gifts/img2.jpg</span>
+<span class="hljs-string">../img/gifts/img3.jpg</span>
+<span class="hljs-string">../img/gifts/img4.jpg</span>
+<span class="hljs-string">../img/gifts/img6.jpg</span>
+<span class="hljs-string">'''</span></code></pre>
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Web-Scraping-With-Python/">Web Scraping With Python</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/07/03/re%E5%BA%93/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">RE库</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/03/Scrapy%E6%A1%86%E6%9E%B6%E7%AE%80%E6%9E%90/">
+                        <span class="hidden-mobile">Scrapy框架简析</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+    <!-- APlayer 音乐播放器 -->
+    <div id="aplayer"></div>
+    <script defer src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js" ></script>
+<link  rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css" />
+<script type="text/javascript">
+  var oldLoadAp = window.onload;
+  window.onload = function () {
+    oldLoadAp && oldLoadAp();
+
+    new APlayer({
+      container: document.getElementById('aplayer'),
+      fixed: true,
+      autoplay: 'false' === 'true',
+      loop: 'all',
+      order: 'random',
+      theme: '#b7daff',
+      preload: 'none',
+      audio: [{"name":"7!! - オレンジ","artist":"7!!","url":"/songs/7!! - オレンジ.flac","cover":"/img/avatar.png"},{"name":"CMJ - 告白之夜（纯音乐）（翻自 Ayasa绚沙）","artist":"CMJ","url":"/songs/CMJ - 告白之夜（纯音乐）（翻自 Ayasa绚沙）.flac","cover":"/img/avatar.png"},{"name":"Goose house - 光るなら","artist":"Goose house","url":"/songs/Goose house - 光るなら.flac","cover":"/img/avatar.png"},{"name":"古川恵実子,清水美恵 - 一人でも平気","artist":"古川恵実子; 清水美恵","url":"/songs/古川恵実子,清水美恵 - 一人でも平気.mp3","cover":"/img/avatar.png"}]
+    });
+  }
+</script>
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+
+    
+      <!-- cnzz Analytics Icon -->
+      <span id="cnzz_stat_icon_1279244964" style="display: none"></span>
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "正则表达式概念及语法&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?81b817ad71420a4ec141dc171d1ac786";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <!-- cnzz Analytics -->
+    <script defer src="//s4.cnzz.com/z_stat.php?id=1279244964&show=pic"
+            type="text/javascript"></script>
+  
+
+
+
+
+
+</body>
+</html>
