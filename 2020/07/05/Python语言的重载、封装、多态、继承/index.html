@@ -1,0 +1,679 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Frank Yeats">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="✨Python语言的重载、封装、多态、继承一、重载子类中的方法会覆盖父类中同名的方法 123456789101112class Cat:    def sayHello(self):        print(&#x27;mua------1&#x27;)class Bosi(Cat):    def sayHello(self):        print(&#x27;mua------2&amp;#x">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python语言的重载、封装、多态、继承">
+<meta property="og:url" content="https://www.yeats.ink/2020/07/05/Python%E8%AF%AD%E8%A8%80%E7%9A%84%E9%87%8D%E8%BD%BD%E3%80%81%E5%B0%81%E8%A3%85%E3%80%81%E5%A4%9A%E6%80%81%E3%80%81%E7%BB%A7%E6%89%BF/index.html">
+<meta property="og:site_name" content="烨辞的博客">
+<meta property="og:description" content="✨Python语言的重载、封装、多态、继承一、重载子类中的方法会覆盖父类中同名的方法 123456789101112class Cat:    def sayHello(self):        print(&#x27;mua------1&#x27;)class Bosi(Cat):    def sayHello(self):        print(&#x27;mua------2&amp;#x">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-05T02:51:48.000Z">
+<meta property="article:modified_time" content="2020-07-05T02:55:46.000Z">
+<meta property="article:author" content="Frank Yeats">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Python语言的重载、封装、多态、继承 - 烨辞的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"www.yeats.ink","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="烨辞的博客" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Python语言的重载、封装、多态、继承"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-07-05 10:51" pubdate>
+          2020年7月5日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          15 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Python语言的重载、封装、多态、继承</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="✨Python语言的重载、封装、多态、继承"><a href="#✨Python语言的重载、封装、多态、继承" class="headerlink" title="✨Python语言的重载、封装、多态、继承"></a>✨Python语言的重载、封装、多态、继承</h1><h1 id="一、重载"><a href="#一、重载" class="headerlink" title="一、重载"></a>一、重载</h1><p><strong>子类中的方法会覆盖父类中同名的方法</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">sayHello</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;mua------1&#x27;</span>)</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Bosi</span>(<span class="title class_ inherited__">Cat</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">sayHello</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;mua------2&#x27;</span>)</span><br><span class="line">Bosi=Bosi()</span><br><span class="line">Bosi.sayHello()</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">以上结果如下：</span></span><br><span class="line"><span class="string">mua------2</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="二、封装"><a href="#二、封装" class="headerlink" title="二、封装"></a>二、封装</h1><p>通过设置好的接口函数来访问对象原理：<br>面向对象编程的一个重要特点就是数据封装。<br>既然Cat实例本身就拥有这些数据，要访问这些数据，就没有必要从外面的函数去访问，可以直接在Cat类的内部定义访问数据的函数，<br>这样，就把“数据”给封装起来了。这些封装数据的函数是Cat类本身是关联起来的，我们称之为类的方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span>():</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,name,age</span>):      <span class="comment"># __init__是特殊变量，特殊变量是可以直接访问的,不是private变量</span></span><br><span class="line">        self._name=name</span><br><span class="line">        self._age=age</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">sleep</span>(<span class="params">self</span>):           <span class="comment"># 设置接口函数，封装</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;%d岁的%s正在沙发上睡懒觉。&#x27;</span>%(self._age,self._name))  </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">eat</span>(<span class="params">self,food</span>):        <span class="comment"># 设置接口函数，封装</span></span><br><span class="line">        self._food=food</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;%d岁的%s正在吃%s。&#x27;</span>%(self._age,self._name,self._food))</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getAttribute</span>(<span class="params">self</span>):    <span class="comment"># 设置接口函数，封装</span></span><br><span class="line">        <span class="keyword">return</span> self._name,self._age</span><br><span class="line">cat1=Cat(<span class="string">&#x27;Tom&#x27;</span>,<span class="number">3</span>)      <span class="comment"># 创建对象，输入参数</span></span><br><span class="line">cat2=Cat(<span class="string">&#x27;Jack&#x27;</span>,<span class="number">4</span>)     <span class="comment"># 创建对象，输入参数</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Cat1的名字为：&#x27;</span>,cat1.name)         <span class="comment"># 私有化后从外部访问对象的属性会发现访问不了</span></span><br><span class="line">Traceback (most recent call last):      </span><br><span class="line">  File <span class="string">&quot;d:/01.Software/GitHub/GitHub Repository/hello-world/《Python编程基础》例题练习/5.1面对对象编程/6.对类的数据属性和方法进行私有化.py&quot;</span>, line <span class="number">23</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Cat1的名字为：&#x27;</span>,cat1.name)</span><br><span class="line">AttributeError: <span class="string">&#x27;Cat&#x27;</span> <span class="built_in">object</span> has no attribute <span class="string">&#x27;name&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(cat1.sleep())           <span class="comment"># 只能通过设置好的接口函数来访问对象</span></span><br><span class="line"><span class="comment"># 结果为：3岁的Tom正在沙发上睡懒觉。</span></span><br><span class="line"><span class="built_in">print</span>(cat2.eat(<span class="string">&#x27;fish&#x27;</span>))       <span class="comment"># 只能通过设置好的接口函数来访问对象</span></span><br><span class="line"><span class="comment"># 结果为：4岁的Jack正在吃fish。</span></span><br><span class="line"><span class="built_in">print</span>(cat1.getAttribute())    <span class="comment"># 只能通过设置好的接口函数来访问对象</span></span><br><span class="line"><span class="comment"># 结果为：(&#x27;Tom&#x27;,3)</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="三、多态"><a href="#三、多态" class="headerlink" title="三、多态"></a>三、多态</h1><h2 id="（一）用isinstance-判断是否为子类-一个对象是否是某种类型"><a href="#（一）用isinstance-判断是否为子类-一个对象是否是某种类型" class="headerlink" title="（一）用isinstance()判断是否为子类&#x2F;一个对象是否是某种类型"></a>（一）用isinstance()判断是否为子类&#x2F;一个对象是否是某种类型</h2><p>当子类和父类都存在相同的函数方法时，子类的函数方法覆盖了父类的函数方法，在代码运行的时候，总是会调用子类的函数方法。这样，我们就获得了继承的另一个好处：多态。</p>
+<p>当我们定义一个class的时候，我们实际上就定义了一种数据类型。我们定义的数据类型和Python自带的数据类型，比如str、list、dict没什么两样：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Animal is running...&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span>(<span class="title class_ inherited__">Animal</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Dog is running...&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span>(<span class="title class_ inherited__">Animal</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Cat is running...&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Tortoise</span>(<span class="title class_ inherited__">Animal</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Tortoise is running slowly...&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>判断一个变量是否是某个类型可以用<code>isinstance()</code>  判断:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="built_in">list</span>() <span class="comment"># a是list类型</span></span><br><span class="line">c = Dog() <span class="comment"># c是Dog类型  </span></span><br><span class="line"></span><br><span class="line"><span class="built_in">isinstance</span>(a, <span class="built_in">list</span>)</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="built_in">isinstance</span>(c, Dog)  </span><br><span class="line"><span class="literal">True</span>  </span><br></pre></td></tr></table></figure>
+
+<p>判断一个类是否是某个类的子类也可以用<code>isinstance()</code>判断:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">isinstance</span>(c,Animal)</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="（二）多态的鸭子类型与开闭原则"><a href="#（二）多态的鸭子类型与开闭原则" class="headerlink" title="（二）多态的鸭子类型与开闭原则"></a>（二）多态的鸭子类型与开闭原则</h2><p>要理解多态的好处，我们还需要再编写一个函数，这个函数接受一个Animal类型的变量：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">run_twice</span>(<span class="params">animal</span>):</span><br><span class="line">    animal.run()</span><br><span class="line">    animal.run()</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>run_twice(Animal())</span><br><span class="line">Animal <span class="keyword">is</span> running...</span><br><span class="line">Animal <span class="keyword">is</span> running...</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>run_twice(Dog())</span><br><span class="line">Dog <span class="keyword">is</span> running...</span><br><span class="line">Dog <span class="keyword">is</span> running...</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>run_twice(Cat())</span><br><span class="line">Cat <span class="keyword">is</span> running...</span><br><span class="line">Cat <span class="keyword">is</span> running...</span><br></pre></td></tr></table></figure>
+
+<p>1.<strong>由于Animal类型有run()方法，因此，传入的任意类型，只要是Animal类或者子类，就会自动调用实际类型的run()方法，这就是多态的意思</strong></p>
+<p>1.1<strong>对于静态语言（例如Java）来说:</strong><br>如果需要传入Animal类型，则传入的对象必须是Animal类型或者它的子类，否则，将无法调用run()方法。</p>
+<p>1.2<strong>对于Python这样的动态语言来说:</strong><br>不一定需要传入Animal类型。我们只需要保证传入的对象有一个run()方法就可以了：<br>即动态语言的 <strong>“鸭子类型”</strong> ，它并不要求严格的继承体系，一个对象只要“看起来像鸭子，走起路来像鸭子”，那它就可以被看做是鸭子。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Timer</span>(<span class="title class_ inherited__">object</span>):  </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Start...&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>run_twice(Timer())  <span class="comment">#Car类不继承，但因为有run()方法所以也可以run</span></span><br><span class="line">Cat <span class="keyword">is</span> running...</span><br><span class="line">Cat <span class="keyword">is</span> running...</span><br></pre></td></tr></table></figure>
+
+
+
+<p>2.对于一个变量，我们只需要知道它是<code>Animal类型</code>，无需确切地知道它的子类型，就可以放心地调用run()方法，而具体调用的run()方法是作用在Animal、Dog、Cat还是Tortoise对象上，由运行时该对象的确切类型决定，这就是多态真正的威力：调用方只管调用，不管细节，而当我们新增一种Animal的子类时，只要确保run()方法编写正确，不用管原来的代码是如何调用的。这就是著名的 <strong>“开闭”原则</strong>：</p>
+<p><strong>对扩展开放：允许新增<code>Animal</code>子类；</strong></p>
+<p><strong>对修改封闭：不需要修改依赖<code>Animal</code>类型的<code>run_twice()</code>等函数。</strong></p>
+<hr>
+<h1 id="四、继承"><a href="#四、继承" class="headerlink" title="四、继承"></a>四、继承</h1><p><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/python-extends-init.html">参考网站</a></p>
+<h2 id="情况一：子类需要自动调用父类的方法："><a href="#情况一：子类需要自动调用父类的方法：" class="headerlink" title="情况一：子类需要自动调用父类的方法："></a>情况一：子类需要自动调用父类的方法：</h2><p><strong>子类不重写__init__()方法，实例化子类后，会自动调用父类的__init__()的方法。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Father</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,name</span>):</span><br><span class="line">        self.name=name</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;name:%s&#x27;</span>%self.name)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_name</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;Father &#x27;</span>+self.name</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">test</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span>(<span class="string">&#x27;这是父类的方法&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Son</span>(<span class="title class_ inherited__">Father</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_name</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;Son &#x27;</span>+self.name</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    son=Son(<span class="string">&#x27;Yeats&#x27;</span>)         <span class="comment"># 创建子类对象</span></span><br><span class="line">    <span class="built_in">print</span>(son.test())</span><br><span class="line">    <span class="built_in">print</span>(son.get_name())    </span><br><span class="line"></span><br><span class="line"><span class="comment"># Output:</span></span><br><span class="line">name:Yeats       <span class="comment"># 子类中没有构造方法，以此默认调用父类的构造方法</span></span><br><span class="line">这是父类的方法    <span class="comment"># 子类继承且可调用父类的方法</span></span><br><span class="line">Son Yeats        <span class="comment"># 重装，子类中的方法会覆盖父类中同名的方法</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+<h2 id="情况二：子类不需要自动调用父类的方法："><a href="#情况二：子类不需要自动调用父类的方法：" class="headerlink" title="情况二：子类不需要自动调用父类的方法："></a>情况二：子类不需要自动调用父类的方法：</h2><p><strong>子类重写__init__()方法，实例化子类后，将不会自动调用父类的__init__()的方法。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Father</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,name</span>):</span><br><span class="line">        self.name=name</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;hi&#x27;</span>)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_name</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;Father &#x27;</span>+self.name</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">test</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span>(<span class="string">&#x27;这是父类的方法&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Son</span>(<span class="title class_ inherited__">Father</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name</span>):</span><br><span class="line">        self.name=name</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;hola&#x27;</span>)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_name</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;Son &#x27;</span>+self.name</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    son=Son(<span class="string">&#x27;Frank&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(son.test())</span><br><span class="line">    <span class="built_in">print</span>(son.get_name())</span><br><span class="line"></span><br><span class="line"><span class="comment"># Output:</span></span><br><span class="line">hola    <span class="comment"># 如果重写了__init__ 时，实例化子类，就不会调用父类已经定义的 __init__</span></span><br><span class="line">这是父类的方法    <span class="comment"># 子类继承且可调用父类的方法</span></span><br><span class="line">Son Frank  <span class="comment"># 重装，子类中的方法会覆盖父类中同名的方法</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 id="情况三：子类重写-init-方法又需要调用父类的方法："><a href="#情况三：子类重写-init-方法又需要调用父类的方法：" class="headerlink" title="情况三：子类重写__init__()方法又需要调用父类的方法："></a>情况三：子类重写__init__()方法又需要调用父类的方法：</h2><p><strong>使用super关键词：<code>super(子类，self).__init__(参数1，参数2，....)</code></strong><br>或者<br><strong><code>父类名称.__init__(self,参数1，参数2，...)</code></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Father</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,name</span>):</span><br><span class="line">        self.name=name</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;hi&#x27;</span>)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_name</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;Father &#x27;</span>+self.name</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">test</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span>(<span class="string">&#x27;这是父类的方法&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Son</span>(<span class="title class_ inherited__">Father</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name</span>):</span><br><span class="line">        self.name=name</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;hola&#x27;</span>)</span><br><span class="line">        Father.__init__(self,name)      <span class="comment"># 重写了__init__ 时，但又继承了父类的构造方法</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_name</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;Son &#x27;</span>+self.name</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    son=Son(<span class="string">&#x27;Frank Yeats&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(son.test())</span><br><span class="line">    <span class="built_in">print</span>(son.get_name())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Output:</span></span><br><span class="line">hola</span><br><span class="line">hi</span><br><span class="line">这是父类的方法    <span class="comment"># 子类继承且可调用父类的方法</span></span><br><span class="line">Son Frank Yeats     <span class="comment"># 重装，子类中的方法会覆盖父类中同名的方法</span></span><br></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Python语言的重载、封装、多态、继承</div>
+      <div>https://www.yeats.ink/2020/07/05/Python语言的重载、封装、多态、继承/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Frank Yeats</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2020年7月5日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/09/05/%E3%80%8A%E6%B0%B4%E5%BD%A2%E7%89%A9%E8%AF%AD%E3%80%8B%E9%98%85%E8%AF%BB%E6%91%98%E5%BD%95/" title="《水形物语》阅读摘录">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">《水形物语》阅读摘录</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/03/BeautifulSoup%E7%9A%84find-all%E5%92%8Cfind%E5%87%BD%E6%95%B0/" title="BeautifulSoup的find_all和find函数">
+                        <span class="hidden-mobile">BeautifulSoup的find_all和find函数</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
