@@ -13,28 +13,28 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="Frank Yeats">
+  <meta name="author" content="Yeats">
   <meta name="keywords" content="">
   
     <meta name="description" content="基于BeautifulSoup库的HTML内容查找方法—-BeautifulSoup的find_all()和find()函数find_all()和find()函数通过标签的名字和属性来查找标签 BeautifulSoup对象通过find_all()和find()函数获取标签tag对象类似的，直接调用子标签也可获取标签tag对象，例如soup.div.h1 Beautiful Soup的find_a">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BeautifulSoup的find_all和find函数">
 <meta property="og:url" content="https://www.yeats.ink/2020/07/03/BeautifulSoup%E7%9A%84find-all%E5%92%8Cfind%E5%87%BD%E6%95%B0/index.html">
-<meta property="og:site_name" content="烨辞的博客">
+<meta property="og:site_name" content="烨辞CC">
 <meta property="og:description" content="基于BeautifulSoup库的HTML内容查找方法—-BeautifulSoup的find_all()和find()函数find_all()和find()函数通过标签的名字和属性来查找标签 BeautifulSoup对象通过find_all()和find()函数获取标签tag对象类似的，直接调用子标签也可获取标签tag对象，例如soup.div.h1 Beautiful Soup的find_a">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://www.yeats.ink/BeautifulSoup%E7%9A%84find-all%E5%92%8Cfind%E5%87%BD%E6%95%B0/20190109173523345.png">
+<meta property="og:image" content="https://www.yeats.ink/2020/07/03/BeautifulSoup%E7%9A%84find-all%E5%92%8Cfind%E5%87%BD%E6%95%B0/20190109173523345.png">
 <meta property="article:published_time" content="2020-07-03T12:06:49.000Z">
 <meta property="article:modified_time" content="2020-07-03T12:14:07.000Z">
-<meta property="article:author" content="Frank Yeats">
+<meta property="article:author" content="Yeats">
 <meta property="article:tag" content="BeautifulSoup库">
 <meta property="article:tag" content="Web Scraping With Python">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://www.yeats.ink/BeautifulSoup%E7%9A%84find-all%E5%92%8Cfind%E5%87%BD%E6%95%B0/20190109173523345.png">
+<meta name="twitter:image" content="https://www.yeats.ink/2020/07/03/BeautifulSoup%E7%9A%84find-all%E5%92%8Cfind%E5%87%BD%E6%95%B0/20190109173523345.png">
   
   
   
-  <title>BeautifulSoup的find_all和find函数 - 烨辞的博客</title>
+  <title>BeautifulSoup的find_all和find函数 - 烨辞CC</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -80,7 +80,7 @@
 
 
   
-<meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="烨辞的博客" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="烨辞CC" type="application/atom+xml">
 </head>
 
 
@@ -94,7 +94,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
+      <strong>烨辞CC</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -341,7 +341,7 @@
 <p>3.实例：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re <span class="comment"># 正则表达式库</span></span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">import</span>  requests</span><br><span class="line">r = requests.get(<span class="string">&quot;http://python123.io/ws/demo.html&quot;</span>)</span><br><span class="line">demo = r.text</span><br><span class="line">soup = BeautifulSoup(demo,<span class="string">&quot;html.parser&quot;</span>)</span><br><span class="line"><span class="comment"># 查找demo里的a标签里的href的内容</span></span><br><span class="line"><span class="keyword">for</span> link <span class="keyword">in</span> soup.find_all(<span class="string">&#x27;a&#x27;</span>):</span><br><span class="line">    <span class="built_in">print</span>(link.get(<span class="string">&#x27;href&#x27;</span>))</span><br><span class="line"><span class="comment"># 输出所有a和b标签在列表中</span></span><br><span class="line"><span class="built_in">print</span>(soup.find_all([<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>]))</span><br><span class="line"><span class="comment"># &lt;tag&gt;.find_all(True)，结果将是当前所有标签信息   </span></span><br><span class="line"><span class="keyword">for</span> tag <span class="keyword">in</span> soup.find_all(<span class="literal">True</span>):</span><br><span class="line">    <span class="built_in">print</span>(tag.name)</span><br><span class="line"><span class="comment"># 用正则表达式查找demo里以b开头的所有标签</span></span><br><span class="line"><span class="keyword">for</span> tag <span class="keyword">in</span> soup.find_all(re.<span class="built_in">compile</span>(<span class="string">&#x27;b&#x27;</span>)):</span><br><span class="line">    <span class="built_in">print</span>(tag.name)</span><br><span class="line"><span class="comment"># 查找demo里CSS Class为”course”的&lt;p&gt;标签</span></span><br><span class="line"><span class="built_in">print</span>(soup.find_all(<span class="string">&#x27;p&#x27;</span>,<span class="string">&#x27;course&#x27;</span>))</span><br><span class="line"><span class="comment"># 查找demo里的keyword（关键字参数）id属性中是否包含link1的标签,如果link1没有，将输出空</span></span><br><span class="line"><span class="built_in">print</span>(soup.find_all(<span class="built_in">id</span>=<span class="string">&#x27;link1&#x27;</span>))</span><br><span class="line"><span class="comment"># 用正则表达式来输出link字符串(以link开头)</span></span><br><span class="line"><span class="built_in">print</span>(soup.find_all(<span class="built_in">id</span>=re.<span class="built_in">compile</span>(<span class="string">&#x27;link&#x27;</span>)))</span><br><span class="line"><span class="comment">#　recursive是否对子孙全部检索，默认为True，改为False后只能查儿子节点</span></span><br><span class="line"><span class="built_in">print</span>(soup.find_all(<span class="string">&#x27;a&#x27;</span>,recursive=<span class="literal">False</span>))</span><br><span class="line"><span class="comment"># 检索Basic Python字符串</span></span><br><span class="line"><span class="built_in">print</span>(soup.find_all(string = <span class="string">&#x27;Basic Python&#x27;</span>))</span><br><span class="line"><span class="comment"># 用正则表达式检索含有python的所有字符串</span></span><br><span class="line"><span class="built_in">print</span>(soup.find_all(string = re.<span class="built_in">compile</span>(<span class="string">&#x27;python&#x27;</span>)))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Output：</span></span><br><span class="line">http://www.icourse163.org/course/BIT-<span class="number">268001</span></span><br><span class="line">http://www.icourse163.org/course/BIT-<span class="number">1001870001</span></span><br><span class="line">[&lt;b&gt;The demo python introduces several python courses.&lt;/b&gt;, &lt;a <span class="keyword">class</span>=<span class="string">&quot;py1&quot;</span> href=<span class="string">&quot;http://www.icourse163.org/course/BIT-268001&quot;</span> <span class="built_in">id</span>=<span class="string">&quot;link1&quot;</span>&gt;Basic Python&lt;/a&gt;, </span><br><span class="line">&lt;a <span class="keyword">class</span>=<span class="string">&quot;py2&quot;</span> href=<span class="string">&quot;http://www.icourse163.org/course/BIT-1001870001&quot;</span> <span class="built_in">id</span>=<span class="string">&quot;link2&quot;</span>&gt;Advanced Python&lt;/a&gt;]</span><br><span class="line">html</span><br><span class="line">head</span><br><span class="line">title</span><br><span class="line">body</span><br><span class="line">p</span><br><span class="line">b</span><br><span class="line">p</span><br><span class="line">a</span><br><span class="line">a</span><br><span class="line">body</span><br><span class="line">b</span><br><span class="line">[&lt;p <span class="keyword">class</span>=<span class="string">&quot;course&quot;</span>&gt;Python <span class="keyword">is</span> a wonderful general-purpose programming language. You can learn Python <span class="keyword">from</span> novice to professional by tracking the following courses:</span><br><span class="line">&lt;a <span class="keyword">class</span>=<span class="string">&quot;py1&quot;</span> href=<span class="string">&quot;http://www.icourse163.org/course/BIT-268001&quot;</span> <span class="built_in">id</span>=<span class="string">&quot;link1&quot;</span>&gt;Basic Python&lt;/a&gt; <span class="keyword">and</span> &lt;a <span class="keyword">class</span>=<span class="string">&quot;py2&quot;</span> href=<span class="string">&quot;http://www.icourse163.org/course/BIT-1001870001&quot;</span> <span class="built_in">id</span>=<span class="string">&quot;link2&quot;</span>&gt;Advanced Python&lt;/a&gt;.&lt;/p&gt;]</span><br><span class="line">[&lt;a <span class="keyword">class</span>=<span class="string">&quot;py1&quot;</span> href=<span class="string">&quot;http://www.icourse163.org/course/BIT-268001&quot;</span> <span class="built_in">id</span>=<span class="string">&quot;link1&quot;</span>&gt;Basic Python&lt;/a&gt;]</span><br><span class="line">[&lt;a <span class="keyword">class</span>=<span class="string">&quot;py1&quot;</span> href=<span class="string">&quot;http://www.icourse163.org/course/BIT-268001&quot;</span> <span class="built_in">id</span>=<span class="string">&quot;link1&quot;</span>&gt;Basic Python&lt;/a&gt;, &lt;a <span class="keyword">class</span>=<span class="string">&quot;py2&quot;</span> href=<span class="string">&quot;http://www.icourse163.org/course/BIT-1001870001&quot;</span> <span class="built_in">id</span>=<span class="string">&quot;link2&quot;</span>&gt;Advanced Python&lt;/a&gt;]</span><br><span class="line">[]</span><br><span class="line">[<span class="string">&#x27;Basic Python&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;This is a python demo page&#x27;</span>, <span class="string">&#x27;The demo python introduces several python courses.&#x27;</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h2 id="二、bs4扩展方法："><a href="#二、bs4扩展方法：" class="headerlink" title="二、bs4扩展方法："></a>二、bs4扩展方法：</h2><p><img src="/BeautifulSoup%E7%9A%84find-all%E5%92%8Cfind%E5%87%BD%E6%95%B0/20190109173523345.png" srcset="/img/loading.gif" lazyload alt="bs4扩展方法"></p>
+<h2 id="二、bs4扩展方法："><a href="#二、bs4扩展方法：" class="headerlink" title="二、bs4扩展方法："></a>二、bs4扩展方法：</h2><p><img src="/2020/07/03/BeautifulSoup%E7%9A%84find-all%E5%92%8Cfind%E5%87%BD%E6%95%B0/20190109173523345.png" srcset="/img/loading.gif" lazyload alt="bs4扩展方法"></p>
 <h2 id="三、BeautifulSoup库中的-find-方法介绍："><a href="#三、BeautifulSoup库中的-find-方法介绍：" class="headerlink" title="三、BeautifulSoup库中的.find()方法介绍："></a>三、BeautifulSoup库中的.find()方法介绍：</h2><ol>
 <li>格式：<br><code>find( name , attrs , recursive , string , **kwargs ,keywords)</code></li>
 </ol>
@@ -381,7 +381,7 @@
       
         <div class="license-meta-item">
           <div>作者</div>
-          <div>Frank Yeats</div>
+          <div>Yeats</div>
         </div>
       
       
@@ -534,6 +534,17 @@
     </div>
   
   
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      浙ICP备2024068165号-1
+    </a>
+  </span>
+  
+</div>
+
   
   
 </div>

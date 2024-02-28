@@ -13,28 +13,28 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="Frank Yeats">
+  <meta name="author" content="Yeats">
   <meta name="keywords" content="">
   
     <meta name="description" content="正则表达式正则表达式的基本概念和语法菜鸟教程正则表达式使用总结 一、正则表达式概念正则表达式，又称正规表示法、常规表示法（英语：Regular Expression，在代码中常简写为regex、regexp或RE），计算机科学的一个概念。正则表达式使用单个字符串来描述、匹配一系列符合某个句法规则的字符串。（一）是什么：    是一个通用的字符串表达框架 是简洁表单表达一组字符串的表达式 针对字符串">
 <meta property="og:type" content="article">
 <meta property="og:title" content="正则表达式概念及语法">
 <meta property="og:url" content="https://www.yeats.ink/2020/07/03/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AF%AD%E6%B3%95/index.html">
-<meta property="og:site_name" content="烨辞的博客">
+<meta property="og:site_name" content="烨辞CC">
 <meta property="og:description" content="正则表达式正则表达式的基本概念和语法菜鸟教程正则表达式使用总结 一、正则表达式概念正则表达式，又称正规表示法、常规表示法（英语：Regular Expression，在代码中常简写为regex、regexp或RE），计算机科学的一个概念。正则表达式使用单个字符串来描述、匹配一系列符合某个句法规则的字符串。（一）是什么：    是一个通用的字符串表达框架 是简洁表单表达一组字符串的表达式 针对字符串">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://www.yeats.ink/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AF%AD%E6%B3%95/20170323202311025.png">
-<meta property="og:image" content="https://www.yeats.ink/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AF%AD%E6%B3%95/20170323204916037.png">
+<meta property="og:image" content="https://www.yeats.ink/2020/07/03/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AF%AD%E6%B3%95/20170323202311025.png">
+<meta property="og:image" content="https://www.yeats.ink/2020/07/03/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AF%AD%E6%B3%95/20170323204916037.png">
 <meta property="article:published_time" content="2020-07-03T12:14:00.000Z">
 <meta property="article:modified_time" content="2024-02-26T11:05:59.809Z">
-<meta property="article:author" content="Frank Yeats">
+<meta property="article:author" content="Yeats">
 <meta property="article:tag" content="Web Scraping With Python">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://www.yeats.ink/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AF%AD%E6%B3%95/20170323202311025.png">
+<meta name="twitter:image" content="https://www.yeats.ink/2020/07/03/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AF%AD%E6%B3%95/20170323202311025.png">
   
   
   
-  <title>正则表达式概念及语法 - 烨辞的博客</title>
+  <title>正则表达式概念及语法 - 烨辞CC</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -80,7 +80,7 @@
 
 
   
-<meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="烨辞的博客" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="烨辞CC" type="application/atom+xml">
 </head>
 
 
@@ -94,7 +94,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
+      <strong>烨辞CC</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -292,7 +292,7 @@
 <p>使用re库的compile方法编译,将一个字符串变成一个特征，而这个特征可以表达一组字符串：<br>p&#x3D;re.compile(regex)  </p>
 <p>可以表达：<br>‘PN’<br>‘PYN’<br>‘PYTN’<br>‘PYTHN’<br>‘PYTHON’  </p>
 </blockquote>
-<h2 id="二、正则表达式语法（由字符和操作符构成）"><a href="#二、正则表达式语法（由字符和操作符构成）" class="headerlink" title="二、正则表达式语法（由字符和操作符构成）"></a>二、正则表达式语法（由字符和操作符构成）</h2><h3 id="（一）正则表达式的常用操作符："><a href="#（一）正则表达式的常用操作符：" class="headerlink" title="（一）正则表达式的常用操作符："></a>（一）正则表达式的常用操作符：</h3><p><img src="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AF%AD%E6%B3%95/20170323202311025.png" srcset="/img/loading.gif" lazyload alt="正则表达式的常用操作符1"><br><img src="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AF%AD%E6%B3%95/20170323204916037.png" srcset="/img/loading.gif" lazyload alt="正则表达式的常用操作符2"></p>
+<h2 id="二、正则表达式语法（由字符和操作符构成）"><a href="#二、正则表达式语法（由字符和操作符构成）" class="headerlink" title="二、正则表达式语法（由字符和操作符构成）"></a>二、正则表达式语法（由字符和操作符构成）</h2><h3 id="（一）正则表达式的常用操作符："><a href="#（一）正则表达式的常用操作符：" class="headerlink" title="（一）正则表达式的常用操作符："></a>（一）正则表达式的常用操作符：</h3><p><img src="/2020/07/03/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AF%AD%E6%B3%95/20170323202311025.png" srcset="/img/loading.gif" lazyload alt="正则表达式的常用操作符1"><br><img src="/2020/07/03/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%8F%8A%E8%AF%AD%E6%B3%95/20170323204916037.png" srcset="/img/loading.gif" lazyload alt="正则表达式的常用操作符2"></p>
 <h4 id="1-正则表达式语法常规实例："><a href="#1-正则表达式语法常规实例：" class="headerlink" title="1.正则表达式语法常规实例："></a>1.正则表达式语法常规实例：</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">P(Y|YT|YTH|YTHO)?N    <span class="string">&quot;PN&quot;</span>,<span class="string">&quot;PYN&quot;</span>,<span class="string">&quot;PYTN&quot;</span>,<span class="string">&quot;PYTHN&quot;</span>,<span class="string">&quot;PYTHON&quot;</span></span><br><span class="line">PYTHON+               <span class="string">&quot;PYTHON&quot;</span>,<span class="string">&quot;PYTHONN&quot;</span>,<span class="string">&quot;PYTHONNN...&quot;</span></span><br><span class="line">PY[TH]ON              <span class="string">&quot;PYTON&quot;</span>,<span class="string">&quot;PYHON&quot;</span></span><br><span class="line">PY[^TH]?ON            <span class="string">&quot;PYON&quot;</span>,<span class="string">&quot;PYAON&quot;</span>,<span class="string">&quot;PYXON&quot;</span></span><br><span class="line">PY&#123;:<span class="number">3</span>&#125;N               <span class="string">&quot;PN&quot;</span>,<span class="string">&quot;PYN&quot;</span>,<span class="string">&quot;PYYN&quot;</span>,<span class="string">&quot;PYYYN&quot;</span>   <span class="comment"># 表示扩展前一个字符0到3次，含3次</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="2-正则表达式语法经典实例："><a href="#2-正则表达式语法经典实例：" class="headerlink" title="2.正则表达式语法经典实例："></a>2.正则表达式语法经典实例：</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(cc)*                重复任意偶次数的c</span><br><span class="line">^[A-Za-z]+$          由<span class="number">26</span>个字母组成的字符串</span><br><span class="line">^[A-Za-z0-<span class="number">9</span>]+$       由<span class="number">26</span>个字母和数字组成的字符串</span><br><span class="line">^-?\d+$              整数形式的字符串</span><br><span class="line">^[<span class="number">0</span>-<span class="number">9</span>]*[<span class="number">1</span>-<span class="number">9</span>][<span class="number">0</span>-<span class="number">9</span>]*$  正整数形式的字符串</span><br><span class="line">[<span class="number">1</span>-<span class="number">9</span>]\d&#123;<span class="number">5</span>&#125;           中国境内邮政编码，<span class="number">6</span>位</span><br><span class="line">[\u4e00-\u9fa5]      匹配中文字符  <span class="comment">#采用utf8编码约定中文字符取值范围</span></span><br><span class="line">\d&#123;<span class="number">3</span>&#125;-\d&#123;<span class="number">8</span>&#125;|\d&#123;<span class="number">4</span>&#125;-\d&#123;<span class="number">7</span>&#125;  国内电话号码，<span class="number">0</span>10-<span class="number">68913536</span>  <span class="number">11</span>位啊</span><br></pre></td></tr></table></figure>
@@ -330,7 +330,7 @@
       
         <div class="license-meta-item">
           <div>作者</div>
-          <div>Frank Yeats</div>
+          <div>Yeats</div>
         </div>
       
       
@@ -483,6 +483,17 @@
     </div>
   
   
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      浙ICP备2024068165号-1
+    </a>
+  </span>
+  
+</div>
+
   
   
 </div>
